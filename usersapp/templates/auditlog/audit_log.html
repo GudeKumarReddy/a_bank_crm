@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 10px; /* Adds space between columns */
+    }
+    th, td {
+        padding: 8px; /* Adds padding inside each cell */
+        border: 1px solid #ddd;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+</style>
+
+<h2>Audit Logs</h2>
+<form method="get">
+    <input type="text" name="user" placeholder="Filter by user">
+    <button type="submit">Search</button>
+</form>
+<table>
+    <thead>
+        <tr>
+            <th>User</th>
+            <th>Method</th>
+            <th>Input data</th>
+            <th>Description</th>
+            <th>API</th>
+            <th>Time</th>
+            <th>Status Code</th>
+            <th>Success</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for log in logs %}
+        <tr>
+            <td>{{ log.user.username }}</td>
+            <td>{{ log.action }}</td>
+            <td>{{ log.input_data }}</td>
+            <td>{{ log.description }}</td>
+             <td>{{ log.api }}</td>
+            <td>{{ log.timestamp }}</td>
+            <td>{{ log.status_code }}</td>
+            <td>{{ log.success }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
